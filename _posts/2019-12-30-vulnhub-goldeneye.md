@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Vulnhub - GoldenEye Walkthrough"
+title: "VulnHub - GoldenEye Walkthrough"
 author: "joona"
 ---
 
