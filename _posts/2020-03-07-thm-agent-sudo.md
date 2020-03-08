@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "TryHackMe - Agent Sudo"
+title: "TryHackMe - Agent Sudo Walkthrough"
 author: "joona"
 ---
 
