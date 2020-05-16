@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "TryHackMe - Agent Sudo Walkthrough"
+title: "TryHackMe - Agent Sudo"
 author: "joona"
 ---
 
@@ -54,7 +54,7 @@ Agent R
 {% endhighlight %}
 
 Now we have a username **chris** and it's supposed to have a weak password.
-<br/>
+<br/><br/>
 
 ### FTP Enumeration
 Let's try to brute-force our way into the FTP server with username **chris**.
