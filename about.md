@@ -18,6 +18,8 @@ I spend most of my free time doing boot2root and CTF challenges on multiple diff
 
 <br/>
 ### Certifications
-CompTIA Network+ N10-007
-
 eLearnSecurity Junior Penetration Tester (eJPT)
+
+CompTIA Security+ SY0-501
+
+CompTIA Network+ N10-007
