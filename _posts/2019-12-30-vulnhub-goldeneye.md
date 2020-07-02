@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "VulnHub - GoldenEye Walkthrough"
+title: "Vulnhub - GoldenEye"
 author: "joona"
 ---
 
@@ -154,11 +154,11 @@ This is the admin password to the training platform.
 <br/><br/>
 ## Reverse Shell
 
-Enumerating the site as admin we find that the Moodle version is `2.2.3`.
+Enumerating the site as admin we find the Moodle version `2.2.3`.
 If we Google exploits for this, we find a remote command execution vulnerability [CVE-2013-3630][CVE-2013-3630].
 >By updating the path for the spellchecker to an arbitrary command, an attacker can run arbitrary commands in the context of the web application upon spellchecking requests.
 
-So if we change the path for spellchecker, and run it, we get a reverse shell.<br/>
+So if we change the path for spellchecker, let's say to and run it, we get a reverse shell.<br/>
 Spellchecker path -setting is at **Home > Site administration > Server > System paths.**
 
 Before we can exploit this we have to change the `Spell engine` from default "Google Spell" to "PSpellShell" at **Home > Site administration >

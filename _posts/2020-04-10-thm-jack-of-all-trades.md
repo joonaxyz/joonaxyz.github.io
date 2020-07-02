@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "TryHackMe - Jack of All Trades Walkthrough"
+title: "TryHackMe - Jack of All Trades"
 author: "joona"
 ---
 
