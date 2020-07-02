@@ -5,8 +5,8 @@ author: "joona"
 ---
 
 ![](/images/servmon/sermon.jpg)
-ServMon is an easy Windows box where the initial access is achieved with help of a directory traversal
-vulnerability and the privilege escalation to NT AUTHORITY\SYSTEM requires exploiting a service monitoring
+ServMon is an easy Windows box where the initial access is achieved with the help of a directory traversal
+vulnerability. The privilege escalation to NT AUTHORITY\SYSTEM requires exploiting a service monitoring
 agent called NSClient++. The privilege escalation proof of concept gave me some pain, but I
 managed to figure it out in the end. Fun box!
 
