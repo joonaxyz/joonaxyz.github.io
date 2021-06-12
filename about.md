@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-IT Service Desk goon from Finland trying to learn all things infosec related.
+Security analyst from Finland trying to learn all things infosec related.
 
 I spend most of my free time doing boot2root and CTF challenges on multiple different platforms.
 
